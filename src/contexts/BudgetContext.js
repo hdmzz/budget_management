@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import { v4 as uuid } from "uuid";
+import React, { useContext, useState} from "react";
+import { v4 as uuidv4 } from "uuid";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const BudgetContext = React.createContext();
 
@@ -9,28 +10,36 @@ export function useBudgets() {
 
 
 export const BudgetProvider = ({ children }) => {
+    const [budgets, setBudgets] = useLocalStorage("budgets", []);
+    const [expenses, setExpenses] = useLocalStorage("expense", []);
+
+    function getBudgetExpenses(budgetId) {
+        return expenses.filter(expense => expense.budgetId !== budgetId)
+    }
+    function addBudget({ name, max}) {
+        setBudgets(prevBudget => {
+            if (prevBudget.find(budget => budget.name === name)) {
+                return prevBudget
+            }
+            return [...prevBudget, { id: uuidv4(), name, max }]
+        })
+    }
     
-    const [budgets, setBudgets] = useState([])
-    const [expenses, setExpenses] = uEeState([])
-
-    function getBudgetExpenses() {
-    
+    function addExpense({description, amount, budgetId }) {
+        setExpenses(prevExpense => {
+            return [...prevExpense, { id: uuidv4(), description, amount, budgetId }]
+        })
+    }
+    function deleteBudget({ id }) {
+        setBudgets(prevBudgets => {
+            return prevBudgets.filter(budget => budget.id !== id)
+        })
     }
 
-    function addExpense() {
-
-    }
-
-    function addBudget() {
-
-    }
-
-    function deleteBudget() {
-
-    }
-
-    function deleteExpense() {
-
+    function deleteExpense({id}) {
+        setExpenses(prevExpenses => {
+            return prevExpenses.filter(expense => expense.id !== id)
+        })
     }
     return (
         <BudgetContext.Provider value={{
