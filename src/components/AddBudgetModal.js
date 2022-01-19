@@ -22,7 +22,7 @@ export default function AddBudgetModal({ show, handleClose }) {
                     <Modal.Title>Ajouter une dépense</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group onSubmit={handleSubmit}>
+                    <Form.Group onSubmit={handleSubmit} controlId="name">
                         <Form.Label>Nom</Form.Label>
                         <Form.Control ref={nameRef} type="text" required />
                     </Form.Group>
