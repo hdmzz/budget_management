@@ -6,6 +6,7 @@ import AddExpenseModal from "./components/AddExpenseModal";
 import ViewExpensesModal from "./components/ViewExpensesModal";
 import { useState } from "react";
 import { useBudgets } from "./contexts/BudgetContext";
+import TotalBudgetCard from "./components/TotalBudgetCard";
 
 function App() {
   //show modals 
@@ -53,6 +54,7 @@ function App() {
             />
           )
         })}
+        <TotalBudgetCard />
       </div>
       <AddBudgetModal show={showAddBudgetModal} handleClose={() => setShowAddBudgetModal(false)}/>
       <AddExpenseModal show={showAddExpenseModal} handleClose={() =>setShowAddExpenseModal(false)} defaultBudgetId={showAddExpenseModalBudgetId}/>

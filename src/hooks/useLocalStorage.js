@@ -5,7 +5,7 @@ export default function useLocalStorage(key, defaultValue) {
         const jsonValue = localStorage.getItem(key)
         if (jsonValue) return JSON.parse(jsonValue);
         if (typeof defaultValue === "function") {
-            return defaultValue()//we can pass a function into the defaultvalue so we make sure that we handle this type od scenario
+            return defaultValue()//we can pass a function into the defaultvalue so we make sure that we handle this type of scenario
         } else {
             return defaultValue
         }
