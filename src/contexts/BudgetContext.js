@@ -3,8 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const BudgetContext = React.createContext();
-
-export const UNCATEGORIZED_BUDGET_ID = "Hors catégorie";
+export const UNCATEGORIZED_BUDGET_ID = "uncategorized";
 
 export function useBudgets() {
     return useContext(BudgetContext);
@@ -18,7 +17,6 @@ export const BudgetProvider = ({ children }) => {
     function getBudgetExpenses(budgetId) {
         return expenses.filter(expense => expense.budgetId === budgetId)
     }
-
     function addBudget({ name, max}) {
         setBudgets(prevBudget => {
             if (prevBudget.find(budget => budget.name === name)) {
@@ -46,7 +44,6 @@ export const BudgetProvider = ({ children }) => {
     }
     return (
         <BudgetContext.Provider value={{
-            UNCATEGORIZED_BUDGET_ID,
             budgets,
             expenses,
             getBudgetExpenses,
