@@ -44,7 +44,6 @@ function App() {
           )
           return (
             <BudgetCard 
-            gray 
             name={budget.name} 
             amount={amount} 
             budgetMax={budget.max} 

@@ -13,8 +13,9 @@ export default function BudgetCard({ name, amount, budgetMax, gray, onAddExpense
         <Card className={classNames.join(' ')}>
             <Card.Body>
                 <Card.Title className='d-flex justify-content-between fw-normal mb-3'>
-                    <div > {name} </div>
-                    <div> {currencyFormater.format(amount)} 
+                    <div >{name}</div>
+                    <div> 
+                        {currencyFormater.format(amount)} 
                         <span className='text-muted ms-1'>
                             / {currencyFormater.format(budgetMax)} 
                         </span>
@@ -24,10 +25,12 @@ export default function BudgetCard({ name, amount, budgetMax, gray, onAddExpense
                 min={0}
                 max={budgetMax}
                 now={amount}/>
+                {budgetMax && 
                 <Stack direction='horizontal' gap={3} className='mt-3'>
                     <Button variant='outline-primary' className='ms-auto' onClick={onAddExpenseClick}>Ajouter une dépense</Button>
                     <Button variant='outline-secondary' onClick={onViewExpensesClick}>Voir les dépenses</Button>
                 </Stack>
+                }
             </Card.Body>
         </Card>
     )
